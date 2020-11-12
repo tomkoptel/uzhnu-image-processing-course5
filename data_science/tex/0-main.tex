@@ -1,0 +1,66 @@
+%% Преамбула TeX-файла
+
+% 1. Стиль и язык
+\documentclass[utf8x, 12pt]{G7-32} % Стиль (по умолчанию будет 14pt)
+
+% Остальные стандартные настройки убраны в preamble.inc.tex.
+\include{10-preamble}
+
+%Code-specific snippets
+%--------------------------------------
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+
+\lstdefinestyle{light}{
+commentstyle=\color{codegreen},
+keywordstyle=\color{magenta},
+numberstyle=\tiny\color{codegray},
+stringstyle=\color{codepurple},
+basicstyle=\ttfamily\footnotesize,
+breakatwhitespace=false,
+breaklines=true,
+captionpos=b,
+keepspaces=true,
+numbers=left,
+numbersep=5pt,
+showspaces=false,
+showstringspaces=false,
+showtabs=false,
+tabsize=2
+}
+
+\lstset{style=light}
+%--------------------------------------
+
+\begin{document}
+
+    \frontmatter % выключает нумерацию ВСЕГО; здесь начинаются ненумерованные главы: реферат, введение, глоссарий, сокращения и прочее.
+    \include{11-title-page}
+
+    \thispagestyle{empty}
+    \setcounter{page}{0}
+    \tableofcontents
+    \clearpage
+
+
+    \include{2-intro}
+
+    \mainmatter
+
+    \include{31-decision-tree}
+    \include{32-model-validation}
+    \include{33-model-optmisation}
+    \include{34-random-forest}
+
+    \backmatter %% Здесь заканчивается нумерованная часть документа и начинаются ссылки и
+    %% заключение
+
+    \include{4-conclusion}
+
+    \include{5-biblio}
+
+\end{document}

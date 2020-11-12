@@ -1,1 +1,2 @@
 http://pippin.gimp.org/image_processing/chap_dir.html
+https://svi.nl/SamplingRate#:~:text=Definition,of%20discrete%20time%20or%20space).

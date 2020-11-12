@@ -1,29 +1,30 @@
 \chapter{Оптимізація моделі. Вибираємо оптимальне значення рівнів дерева}\label{cha:selecting_number_of_leafs}
 Існує кілька альтернатив для управління глибиною дерева, і багато з них дозволяють, щоб деякі маршрути через дерево мали більшу глибину, ніж інші маршрути.
-Але аргумент \textbf{max\_leaf\_nodes} забезпечує спосіб контролювати переобладнанням та недооснащенням облаштування. Чим більше аркушів ми дозволяємо зробити моделі, тим більше ми переходимо від зони недообладнання на наведеному графіку до зони переоснащення.
+Але аргумент \textbf{max\_leaf\_nodes} забезпечує спосіб контролювати переобладнанням та недооснащенням облаштування.
+Чим більше аркушів ми дозволяємо зробити моделі, тим більше ми переходимо від зони недообладнання на наведеному графіку до зони переоснащення.
 
-Ми можемо використовувати функцію корисності, щоб допомогти порівнkяти оцінки MAE з різних значень для \textbf{max\_leaf\_nodes}.
+Ми можемо використовувати функцію корисності, щоб допомогти порівняти оцінки MAE з різних значень для \textbf{max\_leaf\_nodes}.
 
 З перелічених варіантів 500 - це оптимальна значення для нашої моделі.
 
 \begin{lstlisting}[style=light, language=Python,label={lst:vectorimg},caption=Computing MAE for different value of leaf nodes]
-        from sklearn.metrics import mean_absolute_error
-        from sklearn.tree import DecisionTreeRegressor
+from sklearn.metrics import mean_absolute_error
+from sklearn.tree import DecisionTreeRegressor
 
-        def get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y):
-            model = DecisionTreeRegressor(max_leaf_nodes=max_leaf_nodes, random_state=0)
-            model.fit(train_X, train_y)
-            preds_val = model.predict(val_X)
-            mae = mean_absolute_error(val_y, preds_val)
-            return(mae)
+def get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y):
+    model = DecisionTreeRegressor(max_leaf_nodes=max_leaf_nodes, random_state=0)
+    model.fit(train_X, train_y)
+    preds_val = model.predict(val_X)
+    mae = mean_absolute_error(val_y, preds_val)
+    return(mae)
 
-        # compare MAE with differing values of max_leaf_nodes
-        for max_leaf_nodes in [5, 50, 500, 5000]:
-            my_mae = get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y)
-            print("Max leaf nodes: %d  \t\t Mean Absolute Error:  %d" %(max_leaf_nodes, my_mae))
+# compare MAE with differing values of max_leaf_nodes
+for max_leaf_nodes in [5, 50, 500, 5000]:
+    my_mae = get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y)
+    print("Max leaf nodes: %d  \t\t Mean Absolute Error:  %d" %(max_leaf_nodes, my_mae))
 
-        # Max leaf nodes: 5  		 Mean Absolute Error:  347380
-        # Max leaf nodes: 50  		 Mean Absolute Error:  258171
-        # Max leaf nodes: 500  		 Mean Absolute Error:  243495
-        # Max leaf nodes: 5000       Mean Absolute Error:  254983
+# Max leaf nodes: 5  		 Mean Absolute Error:  347380
+# Max leaf nodes: 50  		 Mean Absolute Error:  258171
+# Max leaf nodes: 500  		 Mean Absolute Error:  243495
+# Max leaf nodes: 5000       Mean Absolute Error:  254983
 \end{lstlisting}

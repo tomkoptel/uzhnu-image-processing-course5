@@ -1,0 +1,209 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[cp1251]{inputenc}
+\usepackage[english, russian, ukrainian]{babel}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% елеме
+%\usepackage{psfig,graphicx,showkeys}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\usepackage[document]{ragged2e}
+%    \usepackage{mathptmx}
+
+\usepackage{amsmath,amssymb,euscript,amsthm}
+\usepackage{enumitem}
+\usepackage{graphicx}
+%\usepackage{setspace}
+\usepackage[nodisplayskipstretch]{setspace}
+
+\usepackage{cite}
+\usepackage{mathtools}
+\usepackage{longtable}
+\usepackage{color} %% это для отображения цвета в коде
+\usepackage{listings} %% собственно, это и есть пакет listings
+
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}} %% это сделает текст заголовка белым
+%% код ниже нарисует серую рамочку вокруг заголовка кода.
+\DeclareCaptionFormat{listing}{\colorbox{white}{\parbox{\textwidth}{#1#2#3}}}
+\captionsetup[lstlisting]{format=listing}
+
+%\usepackage{makeindx}
+%\makeindex
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\parindent=1.25cm
+
+
+\textwidth=15,5cm
+\textheight=22cm
+\hoffset=-0.8cm
+\voffset=-1.3cm
+\pagestyle{myheadings}
+\makeatletter
+\@addtoreset{equation}{section}
+\makeatother
+\makeatletter
+\@addtoreset{section}{part}
+\makeatother
+\makeatletter
+\@addtoreset{thm}{section}
+\makeatother
+\makeatletter
+\@addtoreset{lem}{section}
+\makeatother
+\makeatletter
+\@addtoreset{expl}{section}
+\makeatother
+\makeatletter
+\@addtoreset{remk}{section}
+\makeatother
+\makeatletter
+\@addtoreset{nsl}{section}
+\makeatother
+\makeatletter
+\@addtoreset{defn}{section}
+\makeatother
+
+
+    \usepackage{titlesec}
+    \titleformat{\chapter}[block]{\centering\fontseries{bx}\fontsize{18pt}{18pt}\selectfont}{\chaptertitlename~\thechapter.}{12pt}{}
+  \titleformat{\section}[block]{\Large\bfseries\filcenter}{\thesection}{1em}{}
+\titlespacing*{\chapter}{0pt}{-30pt}{8pt}
+%\titlespacing*{\section}{\parindent}{*4}{*4}
+%\titlespacing*{\subsection}{\parindent}{*4}{*4}
+\titlespacing\section{0pt}{12pt plus 4pt minus 2pt}{0pt plus 2pt minus 2pt}
+
+\usepackage{fancyhdr}
+    \pagestyle{fancy}
+    \fancyhf{}
+    \fancyhead[R]{\thepage}
+    \fancyheadoffset{0mm}
+    \fancyfootoffset{0mm}
+    \setlength{\headheight}{17pt}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \fancypagestyle{plain}{ 
+        \fancyhf{}
+        \rhead{\thepage}}
+        
+        \usepackage{indentfirst}
+
+
+\renewcommand{\baselinestretch}{1.5}
+\renewcommand{\theequation}{\arabic{chapter}.\arabic{section}.\arabic{equation}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\newcommand{\reft}[1]{\,\;\ref{#1}}
+\newcommand{\st}{\setminus}
+\newcommand{\wt}{\widetilde}
+\newcommand{\wh}{\widehat}
+\newcommand{\ve}{\varepsilon}
+\newcommand{\vf}{\varphi}
+\newcommand{\vk}{\varkappa}
+
+\newcommand{\pt}{\partial}
+\newcommand{\cB}{{\mathcal B}}
+\newcommand{\cG}{{\mathcal G}}
+\newcommand{\cD}{{\mathcal D}}
+\newcommand{\cL}{{\mathcal L}}
+\newcommand{\cH}{{\mathcal H}}
+\newcommand{\cP}{{\mathcal P}}
+\newcommand{\cF}{{\mathcal F}}
+\newcommand{\cA}{{\mathcal A}}
+\newcommand{\cE}{{\mathcal E}}
+\newcommand{\1}{1\!\!\,{\rm I}}
+\newcommand{\mbR}{{\mathbb R}}
+\newcommand{\mbP}{{\mathbb P}}
+\newcommand{\mbE}{{\mathbb E}}
+\newcommand{\mbN}{{\mathbb N}}
+\newcommand{\mbZ}{{\mathbb Z}}
+
+
+
+\newcommand{\ov}{\overline}
+\renewcommand{\lg}{\langle}
+\newcommand{\rg}{\rangle}
+
+
+\newcommand{\mfF}{{\mathfrak F}}
+\newcommand{\mfM}{{\mathfrak M}}
+\newcommand{\mfX}{{\mathfrak X}}
+\newcommand{\mfL}{{\mathfrak L}}
+\newcommand{\mfG}{{\mathfrak G}}
+\newcommand{\mfS}{{\mathfrak S}}
+
+\newcommand{\const}{\mathop{\rm const}}
+\newcommand{\Acirc}{\mathop{A}\limits^{ \ \circ}}
+\newcommand{\Dcirc}{\mathop{\Delta}\limits^{ \circ}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\renewcommand{\refname}{\centerline{СПИСОК ВИКОРИСТАНИХ ДЖЕРЕЛ}}
+%\numberwithin{equation}{section}
+\theoremstyle{plain}
+\newtheorem{thm}{Теорема}
+[section]
+\newtheorem{lem}{Лема}
+[section]
+\newtheorem{tv}{Твердження}[section]
+\newtheorem{hip}{Гіпотеза}[section]
+\newtheorem{corl}{Corollary}[section]
+\theoremstyle{definition}
+\newtheorem{defn}{Означення}
+[section]
+\newtheorem{pos}{Позначення}
+[section]
+\newtheorem{nsl}{Наслідок}
+[section]
+\newtheorem{expl}{Приклад}[section]
+\newtheorem{ex}{Упражнение}
+[section]
+
+\theoremstyle{remark}
+\newtheorem{remk}{Зауваження}[section]
+\renewcommand{\proofname}{Доведення}
+\renewcommand{\thepart}{\arabic{part}}
+\renewcommand{\thechapter}{\arabic{chapter}}
+\renewcommand{\chaptername}{РОЗДІЛ}
+
+\DeclareMathOperator{\fsign}{Fsign}
+\DeclareMathOperator{\supp}{supp}
+
+%\renewcommand{\partname}{\hspace{5cm}Глава}
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+\renewcommand{\contentsname}{\centerline{Зміст}}
+
+\usepackage{titletoc}%
+\titlecontents{chapter}% <section-type>
+  [0pt]% <left>
+  {\bfseries}% <above-code>
+  {\chaptername\ \thecontentslabel:\quad}% <numbered-entry-format>
+  {}% <numberless-entry-format>
+  {\hfill\contentspage}% <filler-page-format>
+
+\def\thechapter{\Roman{chapter}}
+% Оформление библиографии и подрисуночных записей через точку
+\makeatletter
+\renewcommand*{\@biblabel}[1]{\hfill#1.}
+%\renewcommand*\l@section{\@dottedtocline{1}{1em}{1em}}
+%\renewcommand{\thefigure}{\thesection.\arabic{figure}}  % Формат рисунка секция.номер
+%\renewcommand{\thetable}{\thesection.\arabic{table}}    % Формат таблицы секция.номер
+%\def\redeflsection{\def\l@section{\@dottedtocline{1}{0em}{10em}}}
+\makeatother
+
+\makeatletter
+\renewenvironment{thebibliography}[1]
+    {\section*{\refname}
+        \list{\@biblabel{\@arabic\c@enumiv}}
+           {\settowidth\labelwidth{\@biblabel{#1}}
+            \leftmargin\labelsep
+            \itemindent 16.7mm
+            \@openbib@code
+            \usecounter{enumiv}
+            \let\p@enumiv\@empty
+            \renewcommand\theenumiv{\@arabic\c@enumiv}
+        }
+        \setlength{\itemsep}{0pt}
+    }
+\makeatother
+
+
+

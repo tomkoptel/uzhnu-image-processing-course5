@@ -1,0 +1,270 @@
+\newpage
+\addcontentsline{toc}{chapter}{\bf Список використаної літератури}
+\renewcommand{\bibname}{\centerline{\bf Список використаної літератури}}
+%\chapter*{\centerline{\bf СПИСОК ВИКОРИСТАНОЇ ЛІТЕРАТУРИ}}\label{lit}
+
+\renewcommand{\refname}{\centerline{\bf Список використаної літератури}}
+\begin{thebibliography}{999}\label{bib}
+%{ \baselineskip=20pt
+%1
+
+
+\bibitem{Karp1991}  
+{\it Richard M. Karp} An introduction to randomized algorithms / R.M. Karp // 
+Discrete Applied Mathematics, Volume 34, Issues 1–3, 1991,pp. 165--201.
+
+\bibitem{SolStr77} {\it R. Solovay and V. Strassen} A fast Monte-Carlo test for primality / R. Solovay, V. Strassen // SIAM J. Comput., 6, 1977, pp. 84--85.
+
+
+\bibitem{Rabin37} {\it M.O. Rabin} Probabilistic algorithms / M.O. Rabin // in: J. Traub, ed., Algorithms and Complexity. - Academic Press, New York, 1976.
+
+
+\bibitem{Gill77} {\it J. Gill} Computational complexity of probabilistic Turing machines/ J. Gill // SIAM J. Comput., 6, 1977, pp. 675--695.
+
+\bibitem{Solomon2001} {\it Solomon, Ronald} A brief history of the classification of the finite simple groups / Solomon R. // American Mathematical Society. Bulletin. New Series, 38 (3), 2001, pp. 315--352. 
+
+\bibitem{Griess82}  
+{\it Griess, Robert L.} The friendly giant // Griess, R.L./ Inventiones Mathematicae, 69 (1), 1982, pp. 1--102. 
+
+\bibitem{Wilson99}
+{\it Wilson, Robert A.} The maximal subgroups of the Baby Monster. I // Wilson R.A. / Journal of Algebra, 211 (1), 1999, pp. 1--14,
+
+\bibitem{Lang2002}
+{\it Lang S.} Algebra / Serge Lang. – New York: Springer - Verlag, 2002. – 914 с. 
+
+\bibitem{erdos65}
+{\it Erdos, P., Renyi} A. Probabilistic methods in group theory. // Erdos, P., Renyi A. / J. Anal. Math. 14, 1965, 127--138. 
+
+\bibitem{laver20}
+{\it Balogh, Z. A. and Laver, V.} RAMEGA, A Package for Random Methods in Group Algebras. Version 1.000, 2020. URL: https://vlaver.github.io/RAMEGA. 
+
+\bibitem{konovalov2014}
+{\it Коновалов А.} Cистема компьютерной алгебры GAP 4.7 [Електронний ресурс] / Александр Коновалов. – 2014. – Режим доступу до ресурсу: https://www.gap-system.org/ukrgap/gapbook/manual.pdf.
+%}
+
+
+%{ \baselineskip=20pt
+
+  \bibitem{GAP4}
+  The GAP~Group, \emph{GAP -- Groups, Algorithms, and Programming, 
+  Version 4.10.0}; 
+  2018,
+  \verb+(https://www.gap-system.org)+.
+%}
+
+\end{thebibliography}
+
+
+
+\newpage
+\addcontentsline{toc}{chapter}{\bf Додаток. Текст програми}
+
+\chapter*{\centerline{\bf Додаток. Текст програми}}\label{vstyppp}
+
+\lstset{ %
+language=GAP,                 % выбор языка для подсветки (здесь это С)
+basicstyle=\small\sffamily\linespread{0.8}, % размер и начертание шрифта для подсветки кода
+%numbers=left,               % где поставить нумерацию строк (слева\справа)
+%numberstyle=\tiny,           % размер шрифта для номеров строк
+%stepnumber=1,                   % размер шага между двумя номерами строк
+%numbersep=5pt,                % как далеко отстоят номера строк от подсвечиваемого кода
+backgroundcolor=\color{white}, % цвет фона подсветки - используем \usepackage{color}
+showspaces=false,            % показывать или нет пробелы специальными отступами
+showstringspaces=false,      % показывать или нет пробелы в строках
+showtabs=false,             % показывать или нет табуляцию в строках
+%frame=single,              % рисовать рамку вокруг кода
+tabsize=2,                 % размер табуляции по умолчанию равен 2 пробелам
+captionpos=t,              % позиция заголовка вверху [t] или внизу [b] 
+breaklines=true,           % автоматически переносить строки (да\нет)
+breakatwhitespace=false, % переносить строки только если есть пробел
+escapeinside={\%*}{*)}   % если нужно добавить комментарии в коде
+}
+
+\fontsize{12}{14}\selectfont
+
+\begin{lstlisting}[label=dod, frame=none]
+SquareRoot:=function(a,F)
+  local c,x,alpha,beta,r,p,G, pol,coef;
+  p:=Size(F);
+  G:=Group(PrimitiveElement(F));
+
+  c:=Random(Elements(G));
+  while Legendre(Int(c)^2-Int(a),p)<>-1 do
+    c:=Random(Elements(G));
+  od;
+
+  x:=Indeterminate(F);
+  pol:=Gcd(x^((p-1)/2)-1,(x-c)^2 -a);
+  coef:=CoefficientsOfUnivariatePolynomial(pol);
+  alpha:=coef[2];
+  beta:=coef[1];
+  r:=alpha^(-1)*beta;
+
+  return [c+r,-c-r];
+end;
+
+IsComposite:=function(n)
+  local a,i;
+  i:=1;
+  while i<=1000 do
+    a:=Random([1..n-1]);
+    if Gcd(a,n)<>1 then
+      return true;
+    fi;
+    i:=i+1;
+  od;
+  return false;
+end;
+
+
+#Computes the generator of the CyclicGroup in a Random way
+GeneratorOfCyclicGroupRandom:=function(G)
+  local fact,i,bool,n,m,g,bool2;
+  if IsCyclic(G)=false then return fail; fi;
+  fact:=Set(FactorsInt(Size(G)));
+
+  n:=Size(fact);m:=Size(G);
+  bool:=false;
+
+  while bool=false do
+    g:=Random(G);
+    bool2:=false;
+    for i in [1..n] do
+      if g^(m/fact[i])=One(G) then bool2:=true; break; fi;
+    od;
+    if bool2 = false then bool:=true; fi;
+  od;
+  return g;
+end;
+
+
+RandomUnit:=function(kg)
+   local x,o;
+   o:=Zero(UnderlyingField(kg));
+   repeat
+      x:=Random(kg);
+   until(x^-1<>fail);
+   return x;
+end;
+
+RandomNormalizedUnit:=function(kg)
+local k, g, e, x;
+  k:=UnderlyingField(kg);
+	g:=UnderlyingGroup(kg);
+  if not(Size(g) mod Characteristic(k) = 0) then
+	   Error("Input should be a Modular Group Algebra.");
+ fi;
+
+ e:=One(UnderlyingField(kg));
+ repeat
+    x:=Random(kg);
+ until(Augmentation(x) = e);
+ return x;
+end;
+
+RandomUnitaryUnit:=function(kg)
+   local x,e;
+   e:=One(kg);
+   repeat
+      x:=RandomUnit(kg);
+   until(x*Involution(x) = e);
+   return x;
+end;
+
+RandomNormalizedUnitaryUnit:=function(kg)
+   local x,e,k,g;
+   k:=UnderlyingField(kg);
+ 	g:=UnderlyingGroup(kg);
+   if not(Size(g) mod Characteristic(k) = 0) then
+ 	   Error("Input should be a Modular Group Algebra.");
+  fi;
+   e:=One(kg);
+   repeat
+      x:=RandomNormalizedUnit(kg);
+   until(x*Involution(x) = e);
+   return x;
+end;
+
+RandomCentralNormalizedUnit:=function(kg)
+   local x,e,c,k,g;
+   k:=UnderlyingField(kg);
+ 	g:=UnderlyingGroup(kg);
+   if not(Size(g) mod Characteristic(k) = 0) then
+ 	   Error("Input should be a Modular Group Algebra.");
+  fi;
+   c:=Center(kg);
+   e:=One(UnderlyingField(kg));
+   repeat
+      x:=Random(c);
+   until(Augmentation(x) = e);
+   return x;
+end;
+
+IsDihedralGroup := function(G)
+local p,m,exponent;
+
+    if ( IsPGroup(G) and not(IsAbelian(G)) ) then
+      p:=PrimePGroup(G);
+      if p<>2 then
+        # Error("The Group should be a non abelian 2-group.");
+        return false;
+      fi;
+      exponent:=Lcm(Set((List(Elements(G),j->Order(j)))));
+      if exponent=Size(G)/2 then
+        if Size(Filtered(Elements(G),j->Order(j)<=2))=exponent+2 then
+          return true;
+        else
+          return false;
+        fi;
+      else return false;
+      fi;
+    else
+      return false;
+    fi;
+end;
+
+
+RandomDihedralDepth:=function(KG,n)
+    local a,b,dd,g,s,k,i,j,exp;
+    if not( IsPGroup(UnderlyingGroup(KG))) then
+        Error("G should be a p group.");
+    fi;
+
+    k:=0;
+    for i in [1..n] do
+      a:=RandomUnit(KG); b:=RandomUnit(KG);
+      if Order(a)>=2 and Order(b)>=2 and a*b<>b*a then
+        g:=Group(a,b); s:=Size(g);
+       if IsDihedralGroup(g) and s>k then
+           k:=s;
+       fi;
+      fi;
+    od;
+
+    if k<>0 then return LogInt(k,2)-1; else return 0; fi;
+end;
+
+RandomQuaternionDepth:=function(KG,n)
+    local a,b,dd,g,s,k,i,j,exp;
+    if not( IsPGroup(UnderlyingGroup(KG))) then
+        Error("G should be a p group.");
+    fi;
+    k:=0;
+    for i in [1..n] do
+      a:=RandomUnit(KG); b:=RandomUnit(KG);
+      if Order(a)>=2 and Order(b)>=2 and a*b<>b*a then
+        g:=Group(a,b); s:=Size(g);
+        exp:= Lcm(Set(List(Elements(g),j->Order(j))));
+
+        if s/exp=2 then
+          if Size(Filtered(Elements(g),j->Order(j)<=2))=2 and s>k then k:=s; fi;
+        fi;
+      fi;
+    od;
+
+    if k<>0 then return LogInt(k,2)-1; else return 0; fi;
+end);
+
+\end{lstlisting}
+
+%%================

@@ -4,10 +4,10 @@ PDFLATEX='pdflatex -interaction=nonstopmode -shell-escape -file-line-error'
 GREP='grep ".*:[0-9]*:.*"' # показывает на выходе только ошибки
 
 # Файлы/Папки
-PDF_NAME='dyplom.pdf'
+PDF_NAME='Bak-Klymchuk.pdf'
 TEX='tex'
 IMG='tex/inc/img'
-MAINTEX='main'
+MAINTEX='Bak-Klymchuk'
 
 # Конвертация eps
 find -E $IMG/ -type f -name "*.eps" -exec epstopdf {} ";" ;

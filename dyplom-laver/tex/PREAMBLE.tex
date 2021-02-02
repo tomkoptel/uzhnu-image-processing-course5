@@ -1,6 +1,7 @@
 \documentclass[a4paper,12pt]{report}
+\usepackage[cp1251]{inputenc}
 \usepackage[english, russian, ukrainian]{babel}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%% РµР»РµРјРµ
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% елеме
 %\usepackage{psfig,graphicx,showkeys}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\usepackage[document]{ragged2e}
@@ -15,12 +16,12 @@
 \usepackage{cite}
 \usepackage{mathtools}
 \usepackage{longtable}
-\usepackage{color} %% СЌС‚Рѕ РґР»СЏ РѕС‚РѕР±СЂР°Р¶РµРЅРёСЏ С†РІРµС‚Р° РІ РєРѕРґРµ
-\usepackage{listings} %% СЃРѕР±СЃС‚РІРµРЅРЅРѕ, СЌС‚Рѕ Рё РµСЃС‚СЊ РїР°РєРµС‚ listings
+\usepackage{color} %% это для отображения цвета в коде
+\usepackage{listings} %% собственно, это и есть пакет listings
 
 \usepackage{caption}
-\DeclareCaptionFont{white}{\color{white}} %% СЌС‚Рѕ СЃРґРµР»Р°РµС‚ С‚РµРєСЃС‚ Р·Р°РіРѕР»РѕРІРєР° Р±РµР»С‹Рј
-%% РєРѕРґ РЅРёР¶Рµ РЅР°СЂРёСЃСѓРµС‚ СЃРµСЂСѓСЋ СЂР°РјРѕС‡РєСѓ РІРѕРєСЂСѓРі Р·Р°РіРѕР»РѕРІРєР° РєРѕРґР°.
+\DeclareCaptionFont{white}{\color{white}} %% это сделает текст заголовка белым
+%% код ниже нарисует серую рамочку вокруг заголовка кода.
 \DeclareCaptionFormat{listing}{\colorbox{white}{\parbox{\textwidth}{#1#2#3}}}
 \captionsetup[lstlisting]{format=listing}
 
@@ -135,40 +136,40 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%\renewcommand{\refname}{\centerline{РЎРџРРЎРћРљ Р’РРљРћР РРЎРўРђРќРРҐ Р”Р–Р•Р Р•Р›}}
+%\renewcommand{\refname}{\centerline{СПИСОК ВИКОРИСТАНИХ ДЖЕРЕЛ}}
 %\numberwithin{equation}{section}
 \theoremstyle{plain}
-\newtheorem{thm}{РўРµРѕСЂРµРјР°}
+\newtheorem{thm}{Теорема}
 [section]
-\newtheorem{lem}{Р›РµРјР°}
+\newtheorem{lem}{Лема}
 [section]
-\newtheorem{tv}{РўРІРµСЂРґР¶РµРЅРЅСЏ}[section]
-\newtheorem{hip}{Р“С–РїРѕС‚РµР·Р°}[section]
+\newtheorem{tv}{Твердження}[section]
+\newtheorem{hip}{Гіпотеза}[section]
 \newtheorem{corl}{Corollary}[section]
 \theoremstyle{definition}
-\newtheorem{defn}{РћР·РЅР°С‡РµРЅРЅСЏ}
+\newtheorem{defn}{Означення}
 [section]
-\newtheorem{pos}{РџРѕР·РЅР°С‡РµРЅРЅСЏ}
+\newtheorem{pos}{Позначення}
 [section]
-\newtheorem{nsl}{РќР°СЃР»С–РґРѕРє}
+\newtheorem{nsl}{Наслідок}
 [section]
-\newtheorem{expl}{РџСЂРёРєР»Р°Рґ}[section]
-\newtheorem{ex}{РЈРїСЂР°Р¶РЅРµРЅРёРµ}
+\newtheorem{expl}{Приклад}[section]
+\newtheorem{ex}{Упражнение}
 [section]
 
 \theoremstyle{remark}
-\newtheorem{remk}{Р—Р°СѓРІР°Р¶РµРЅРЅСЏ}[section]
-\renewcommand{\proofname}{Р”РѕРІРµРґРµРЅРЅСЏ}
+\newtheorem{remk}{Зауваження}[section]
+\renewcommand{\proofname}{Доведення}
 \renewcommand{\thepart}{\arabic{part}}
 \renewcommand{\thechapter}{\arabic{chapter}}
-\renewcommand{\chaptername}{Р РћР—Р”Р†Р›}
+\renewcommand{\chaptername}{РОЗДІЛ}
 
 \DeclareMathOperator{\fsign}{Fsign}
 \DeclareMathOperator{\supp}{supp}
 
-%\renewcommand{\partname}{\hspace{5cm}Р“Р»Р°РІР°}
+%\renewcommand{\partname}{\hspace{5cm}Глава}
 \renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
-\renewcommand{\contentsname}{\centerline{Р—РјС–СЃС‚}}
+\renewcommand{\contentsname}{\centerline{Зміст}}
 
 \usepackage{titletoc}%
 \titlecontents{chapter}% <section-type>
@@ -179,12 +180,12 @@
   {\hfill\contentspage}% <filler-page-format>
 
 \def\thechapter{\Roman{chapter}}
-% РћС„РѕСЂРјР»РµРЅРёРµ Р±РёР±Р»РёРѕРіСЂР°С„РёРё Рё РїРѕРґСЂРёСЃСѓРЅРѕС‡РЅС‹С… Р·Р°РїРёСЃРµР№ С‡РµСЂРµР· С‚РѕС‡РєСѓ
+% Оформление библиографии и подрисуночных записей через точку
 \makeatletter
 \renewcommand*{\@biblabel}[1]{\hfill#1.}
 %\renewcommand*\l@section{\@dottedtocline{1}{1em}{1em}}
-%\renewcommand{\thefigure}{\thesection.\arabic{figure}}  % Р¤РѕСЂРјР°С‚ СЂРёСЃСѓРЅРєР° СЃРµРєС†РёСЏ.РЅРѕРјРµСЂ
-%\renewcommand{\thetable}{\thesection.\arabic{table}}    % Р¤РѕСЂРјР°С‚ С‚Р°Р±Р»РёС†С‹ СЃРµРєС†РёСЏ.РЅРѕРјРµСЂ
+%\renewcommand{\thefigure}{\thesection.\arabic{figure}}  % Формат рисунка секция.номер
+%\renewcommand{\thetable}{\thesection.\arabic{table}}    % Формат таблицы секция.номер
 %\def\redeflsection{\def\l@section{\@dottedtocline{1}{0em}{10em}}}
 \makeatother
 
@@ -203,3 +204,6 @@
         \setlength{\itemsep}{0pt}
     }
 \makeatother
+
+
+

@@ -10,3 +10,8 @@
 * [Flutter Jobs](https://www.itjobswatch.co.uk/jobs/uk/flutter.do)
 * [Google Trends](https://trends.google.com/trends/explore?cat=5&date=today%205-y&q=React%20Native,Flutter)
 * [Developer Survey Stackoverflow 2019](https://insights.stackoverflow.com/survey/2019)
+
+# React Native
+[JSX Standard](https://reactjs.org/docs/jsx-in-depth.html)
+[Expo Limitations](https://docs.expo.io/introduction/why-not-expo/)
+[Managed vs Bare](https://docs.expo.io/introduction/managed-vs-bare/)

@@ -1,2 +1,2 @@
-rootProject.name = "laver-image-processing"
+rootProject.name = "course5"
 

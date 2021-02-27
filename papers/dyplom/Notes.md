@@ -15,3 +15,4 @@
 [JSX Standard](https://reactjs.org/docs/jsx-in-depth.html)
 [Expo Limitations](https://docs.expo.io/introduction/why-not-expo/)
 [Managed vs Bare](https://docs.expo.io/introduction/managed-vs-bare/)
+[Should you use React Native to build your startup’s mobile app?](https://medium.com/snipe-gg/should-you-use-react-native-to-build-your-startups-mobile-app-c0baf9f4d9ad)

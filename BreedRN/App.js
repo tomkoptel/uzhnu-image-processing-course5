@@ -9,6 +9,19 @@ import {
   StatusBar,
 } from "react-native";
 
+import Realm from "realm";
+
+const TaskSchema = {
+  name: "Task",
+  properties: {
+    name: "string",
+  },
+};
+const config = {
+  deleteRealmIfMigrationNeeded: true,
+  schema: [TaskSchema],
+};
+
 export default function App() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
@@ -20,7 +33,18 @@ export default function App() {
         let keys = Object.keys(json.message);
         let uniqueKeys = new Set(keys);
         let data = Array.from(uniqueKeys);
-        setData(data);
+        Realm.open(config).then((realm) => {
+          console.log(realm);
+          realm.write(() => {
+            realm.create("Task", { name: "Ali" });
+          });
+
+          const tasks = realm.objects("Task");
+          console.log(tasks);
+
+          setData(data);
+          realm.close();
+        });
       })
       .catch((error) => {
         console.error(error);

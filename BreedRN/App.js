@@ -1,36 +1,49 @@
-import React from 'react';
-import { SafeAreaView, View, FlatList, StyleSheet, Text, StatusBar } from 'react-native';
+import React, { useEffect, useState } from "react";
+import {
+  ActivityIndicator,
+  SafeAreaView,
+  View,
+  FlatList,
+  StyleSheet,
+  Text,
+  StatusBar,
+} from "react-native";
 
-const DATA = [
-  {
-    id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-    title: 'First Item',
-  },
-  {
-    id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-    title: 'Second Item',
-  },
-  {
-    id: '58694a0f-3da1-471f-bd96-145571e29d72',
-    title: 'Third Item',
-  },
-  {
-    id: '58694a0f-wda1-471f-bd96-145571e29d72',
-    title: 'Fourth Item',
-  },
-  {
-    id: '58694a0w-wda1-471f-bd96-145571e29d72',
-    title: 'Fifth Item',
-  },
-  {
-    id: '58692a0w-wda1-471f-bd96-145571e29d72',
-    title: 'Sixth Item',
-  },
-  {
-    id: '58693a0w-wda1-471f-bd96-145571e29d72',
-    title: 'Seventh Item',
-  },
-];
+export default function App() {
+  const [isLoading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    fetch("https://dog.ceo/api/breeds/list/all")
+      .then((response) => response.json())
+      .then((json) => {
+        let keys = Object.keys(json.message);
+        let uniqueKeys = new Set(keys);
+        let data = Array.from(uniqueKeys);
+        setData(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
+  const renderItem = ({ item }) => <Item title={item} />;
+
+  return (
+    <SafeAreaView style={styles.container}>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item) => item}
+        />
+      )}
+    </SafeAreaView>
+  );
+}
 
 const Item = ({ title }) => (
   <View style={styles.item}>
@@ -38,29 +51,13 @@ const Item = ({ title }) => (
   </View>
 );
 
-export default function App() {
-  const renderItem = ({ item }) => (
-    <Item title={item.title} />
-  );
-
-  return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={DATA}
-        renderItem={renderItem}
-        keyExtractor={item => item.id}
-      />
-    </SafeAreaView>
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: StatusBar.currentHeight || 0,
   },
   item: {
-    backgroundColor: '#f9c2ff',
+    backgroundColor: "#f9c2ff",
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,

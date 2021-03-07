@@ -36,7 +36,7 @@ export default function App() {
         Realm.open(config).then((realm) => {
           console.log(realm);
           realm.write(() => {
-            realm.create("Task", { name: "Ali" });
+            // realm.create("Task", { name: "Ali" });
           });
 
           const tasks = realm.objects("Task");

@@ -11,6 +11,9 @@ import {
 
 import Realm from "realm";
 
+import Icon from "react-native-vector-icons/FontAwesome";
+const myIcon = <Icon name="rocket" size={30} color="#900" />;
+
 const TaskSchema = {
   name: "Task",
   properties: {
@@ -23,6 +26,7 @@ const config = {
 };
 
 export default function App() {
+  // To build refreshig state https://www.pluralsight.com/guides/display-a-list-using-the-flatlist-component-in-react-native
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
 
@@ -55,7 +59,12 @@ export default function App() {
   const renderItem = ({ item }) => <Item title={item} />;
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        marginTop: StatusBar.currentHeight || 0,
+      }}
+    >
       {isLoading ? (
         <ActivityIndicator />
       ) : (
@@ -70,23 +79,26 @@ export default function App() {
 }
 
 const Item = ({ title }) => (
-  <View style={styles.item}>
-    <Text style={styles.title}>{title}</Text>
+  <View
+    style={{
+      height: 100,
+      padding: 20,
+      flexDirection: "row",
+    }}
+  >
+    <View style={{ flex: 2, backgroundColor: "red" }}>
+      <Text
+        style={{
+          fontSize: 32,
+        }}
+      >
+        {title}
+      </Text>
+    </View>
+    <View style={{ flex: 1, backgroundColor: "darkorange" }}>
+      <Text>
+        <Icon name="rocket" size={30} color="#900" />
+      </Text>
+    </View>
   </View>
 );
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-  },
-  item: {
-    backgroundColor: "#f9c2ff",
-    padding: 20,
-    marginVertical: 8,
-    marginHorizontal: 16,
-  },
-  title: {
-    fontSize: 32,
-  },
-});

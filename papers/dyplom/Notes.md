@@ -15,3 +15,6 @@
 [JSX Standard](https://reactjs.org/docs/jsx-in-depth.html)
 [Expo Limitations](https://docs.expo.io/introduction/why-not-expo/)
 [Managed vs Bare](https://docs.expo.io/introduction/managed-vs-bare/)
+
+# Kotlin Native
+[Kotlin Multiplatform — A panacea for mobile app development?](https://mayankmkh.medium.com/kotlin-multiplatform-a-panacea-for-mobile-app-development-c41ffe850d1b)
